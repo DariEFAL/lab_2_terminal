@@ -18,6 +18,10 @@ pip install ".[dev]"
 ```bash
 pytest -v
 ```
+Запуск с % покрытия:
+```bash
+pytest --cov=src
+```
 
 ## Поддерживаемые команды
 

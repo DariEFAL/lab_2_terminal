@@ -37,3 +37,12 @@ disallow_untyped_defs = true
 [[tool.mypy.overrides]]
 module = "tests.*"
 ignore_errors = true
+
+[tool.coverage.run]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/conftest.py",
+    "src/terminal.py",
+    "src/main.py",
+]
