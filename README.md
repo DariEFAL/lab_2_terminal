@@ -10,8 +10,13 @@
  python -m src.main
 ```
 ## Запуск тестов
-```powershell
-pytest tests/tests_calc.py
+1. Установи зависимости:
+```bash
+pip install ".[dev]"
+```
+2. Запуск:
+```bash
+pytest -v
 ```
 
 ## Поддерживаемые команды

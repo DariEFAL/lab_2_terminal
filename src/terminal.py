@@ -17,7 +17,7 @@ class Terminal:
     :return: Ничего не возвращает
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Инициализирует терминал"""
         self.path_cwd = Path.cwd()
         self._logging()
@@ -32,7 +32,7 @@ class Terminal:
 
         self.logger = logging.getLogger("terminal")
 
-    def succes_or_error(self, result: str) -> bool:
+    def success_or_error(self, result: str) -> bool:
         """Обрабатывает результат выполнения команды и записывает в shell.log"""
         if result == "SUCCESS":
             self.logger.info(result)
@@ -51,46 +51,46 @@ class Terminal:
             command = command_parsing(command_str)
 
             if isinstance(command, str):
-                self.succes_or_error(command)
+                self.success_or_error(command)
                 continue
             if not command:
                 continue
             if command[0] == "exit":
-                self.succes_or_error("SUCCESS")
+                self.success_or_error("SUCCESS")
                 return None
 
             match command[0]:
                 case 'ls':
                     result = ls(command[1:], self.path_cwd)
-                    self.succes_or_error(result)
+                    self.success_or_error(result)
                     continue
 
                 case 'cd':
                     result = cd(command[1:])
-                    if self.succes_or_error(result):
+                    if self.success_or_error(result):
                         self.path_cwd = Path.cwd()
                     continue
 
                 case 'cat':
                     result = cat(command[1:])
-                    self.succes_or_error(result)
+                    self.success_or_error(result)
                     continue
 
                 case 'cp':
                     result = cp(command[1:])
-                    self.succes_or_error(result)
+                    self.success_or_error(result)
                     continue
 
                 case 'mv':
                     result = mv(command[1:])
-                    self.succes_or_error(result)
+                    self.success_or_error(result)
                     continue
 
                 case 'rm':
                     result = rm(command[1:], self.path_cwd)
-                    self.succes_or_error(result)
+                    self.success_or_error(result)
                     continue
 
                 case _:
                     result = f"ERROR: команда {command[0]} не найдена"
-                    self.succes_or_error(result)
+                    self.success_or_error(result)
