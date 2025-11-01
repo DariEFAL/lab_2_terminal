@@ -10,6 +10,7 @@ def fs(fs):
 
     if sys.platform == "win32":
         base_path = "C:/"
+        fs.create_dir(f"{base_path}/tmp")
     else:
         base_path = "/"
 
@@ -18,7 +19,6 @@ def fs(fs):
     fs.create_file(f"{base_path}/home/user/laba.txt", contents="лаба по питону", encoding="utf-8")
     fs.create_dir(f"{base_path}/home/user/project")
     fs.create_file(f"{base_path}/home/user/project/infa.py", contents="print(1)", encoding="utf-8")
-    fs.create_dir(f"{base_path}/tmp")
     fs.create_file(f"{base_path}/import.txt", contents="очень важно", encoding="utf-8")
 
     return fs

@@ -3,7 +3,7 @@
 ## Запуск программы
 ```powershell
  git clone https://github.com/DariEFAL/lab_calc_1.git
- cd lab_calc_1
+ cd lab_2_terminal
  uv venv
  .venv\Scripts\activate
 (Для Linux: source .venv/bin/activate)
