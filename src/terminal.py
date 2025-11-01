@@ -12,13 +12,12 @@ from src.rm_command import rm
 
 class Terminal:
     """
-    Терминал для выполнения команд оболочки
+    Запуск терминала и обработка команд
     :param: Ничего не принимает
     :return: Ничего не возвращает
     """
 
     def __init__(self) -> None:
-        """Инициализирует терминал"""
         self.path_cwd = Path.cwd()
         self._logging()
 

@@ -2,17 +2,20 @@ import shutil
 from pathlib import Path
 
 
-def mv(argumentes: list) -> str:
+def mv(arguments: list) -> str:
     """
     Реализация команды mv для перемещения и переименования файлов и директорий
     :param argumentes: Список аргументов команды
     :return: "SUCCESS" при успешном выполнении или строку с ошибкой
     """
 
-    if len(argumentes) != 2:
+    if len(arguments) != 2:
         return "ERROR: неправильный синтаксис команды"
 
-    arg_1, arg_2 = [Path(i).expanduser().resolve() for i in argumentes]
+    arg_1, arg_2 = [Path(i).expanduser().resolve() for i in arguments]
+
+    if not arg_2.parent.exists() or not arg_1.parent.exists():
+         return "ERROR: путь не существует"
 
     try:
         if arg_1.is_dir():

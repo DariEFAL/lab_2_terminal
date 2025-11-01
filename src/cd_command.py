@@ -1,17 +1,17 @@
 import os
 from pathlib import Path
 
-def cd(argumentes: list) -> str:
+def cd(arguments: list) -> str:
     """
     Реализация команды cd для изменения текущей рабочей директории
     :param argumentes: Список аргументов команды
     :return: "SUCCESS" при успешном выполнении или строку с ошибкой
     """
 
-    if len(argumentes) != 1:
+    if len(arguments) != 1:
         return "ERROR: команда cd принимает ровно один аргумент"
 
-    arg = Path(argumentes[0]).expanduser().resolve()
+    arg = Path(arguments[0]).expanduser().resolve()
 
     try:
         os.chdir(arg)

@@ -2,7 +2,7 @@ import shutil
 from pathlib import Path
 
 
-def rm(argumentes: list, path_cwd: Path) -> str:
+def rm(arguments: list, path_cwd: Path) -> str:
     """
     Реализация команды rm для удаления файлов и директорий
     :param argumentes: Список аргументов команды
@@ -10,19 +10,19 @@ def rm(argumentes: list, path_cwd: Path) -> str:
     :return: "SUCCESS" при успешном выполнении или строку с ошибкой
     """
 
-    if len(argumentes) - argumentes.count("-r") != 1:
+    if len(arguments) - arguments.count("-r") != 1:
         return "ERROR: неправильный синтаксис команды"
 
-    arg = [Path(i).expanduser().resolve() for i in argumentes if i != "-r"][0]
+    arg = [Path(i).expanduser().resolve() for i in arguments if i != "-r"][0]
 
     try:
         if arg.is_file():
             arg.unlink()
 
         elif arg.is_dir():
-            if "-r" not in argumentes:
+            if "-r" not in arguments:
                 return "ERROR: для удаления директории используйте флаг -r"
-            if arg == arg.root:
+            if arg == Path("C:/") or arg == Path("/"):
                 return "ERROR: запрещено удалять корневой каталог"
             if arg.resolve() in path_cwd.parents or arg.resolve() == path_cwd:
                 return "ERROR: запрещено удалять текущую или родительскую директорию"
