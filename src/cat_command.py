@@ -21,9 +21,7 @@ def cat(arguments: list) -> str:
     try:
         print(arg.read_text(encoding="utf-8"))
     except PermissionError:
-        return f"ERROR: доступ к файлу {arg} запрещён"
-    except OSError:
-        return "ERROR: системная ошибка"
+        return f"ERROR: доступ к файлу/директорию {arg} запрещён"
     except Exception as e:
         return f"ERROR: {e}"
 

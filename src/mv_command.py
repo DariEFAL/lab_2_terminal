@@ -32,6 +32,6 @@ def mv(arguments: list) -> str:
     except PermissionError:
         return "ERROR: доступ запрещён"
     except NotADirectoryError:
-        return f"ERROR: неверно задано имя директории: {arg_1}"
-    except OSError:
-         return "ERROR: Системная ошибка"
+        return "ERROR: неверно задано имя директории"
+    except Exception as e:
+        return f"ERROR: {e}"

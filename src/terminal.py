@@ -8,6 +8,10 @@ from src.cat_command import cat
 from src.cp_command import cp
 from src.mv_command import mv
 from src.rm_command import rm
+from src.zip_command import zip
+from src.unzip_command import unzip
+from src.tar_command import tar
+from src.untar_command import untar
 
 
 class Terminal:
@@ -87,6 +91,26 @@ class Terminal:
 
                 case 'rm':
                     result = rm(command[1:], self.path_cwd)
+                    self.success_or_error(result)
+                    continue
+
+                case 'zip':
+                    result = zip(command[1:])
+                    self.success_or_error(result)
+                    continue
+
+                case 'unzip':
+                    result = unzip(command[1:], self.path_cwd)
+                    self.success_or_error(result)
+                    continue
+
+                case 'tar':
+                    result = tar(command[1:])
+                    self.success_or_error(result)
+                    continue
+
+                case 'untar':
+                    result = untar(command[1:], self.path_cwd)
                     self.success_or_error(result)
                     continue
 

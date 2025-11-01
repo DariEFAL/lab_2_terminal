@@ -30,30 +30,35 @@ def ls(argumentes: list, path_cwd: Path) -> str:
     if not argumentes or argumentes.count("-l") == len(argumentes):
         argumentes.append(path_cwd)
 
-    for arg in argumentes:
-        if arg == "-l":
-            continue
+    try:
+        for arg in argumentes:
+            if arg == "-l":
+                continue
 
-        arg = Path(arg).expanduser().resolve()
+            arg = Path(arg).expanduser().resolve()
 
-        if arg.is_file():
-            print("Каталог:", arg.parent)
-            if flag_l:
-                ls_detailed(arg)
+            if arg.is_file():
+                print("Каталог:", arg.parent)
+                if flag_l:
+                    ls_detailed(arg)
+                else:
+                    print(arg.name)
+
+            elif arg.is_dir():
+                print("Каталог:", arg)
+                if flag_l:
+                    for child in sorted(arg.iterdir()):
+                        ls_detailed(child)
+                else:
+                    for child in sorted(arg.iterdir()):
+                        print(child.name, end="  ")
+                    print()
+
             else:
-                print(arg.name)
+                return f"ERROR: путь {arg} не существует"
 
-        elif arg.is_dir():
-            print("Каталог:", arg)
-            if flag_l:
-                for child in sorted(arg.iterdir()):
-                    ls_detailed(child)
-            else:
-                for child in sorted(arg.iterdir()):
-                    print(child.name, end="  ")
-                print()
-
-        else:
-            return f"ERROR: путь {arg} не существует"
-
-    return "SUCCESS"
+        return "SUCCESS"
+    except PermissionError:
+        return f"ERROR: доступ к файлу {arg} запрещён"
+    except Exception as e:
+        return f"ERROR: {e}"

@@ -18,12 +18,10 @@ def cd(arguments: list) -> str:
     except FileNotFoundError:
         return f"ERROR: директория {arg} не существует"
     except NotADirectoryError:
-        return "ERROR: {arg} не является директорией"
+        return f"ERROR: {arg} не является директорией"
     except PermissionError:
         return f"ERROR: доступ к директории {arg} запрещён"
-    except OSError:
-        return "ERROR: системная ошибка"
-    except Exception:
-        return f"ERROR: не удалось перейти в директорию {arg}"
+    except Exception as e:
+        return f"ERROR: {e}"
 
     return "SUCCESS"

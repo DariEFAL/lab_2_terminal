@@ -35,5 +35,5 @@ def cp(arguments: list) -> str:
         return "ERROR: неправильный путь"
     except PermissionError:
         return "ERROR: доступ запрещён"
-    except OSError:
-         return "ERROR: Системная ошибка"
+    except Exception as e:
+        return f"ERROR: {e}"
