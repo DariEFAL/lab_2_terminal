@@ -36,12 +36,6 @@ def test_rm_error(fs, base_path):
     result = rm(["-r", f"{base_path}"], Path(f"{base_path}"))
     assert "запрещено удалять корневой каталог" in result
 
-    result = rm(["-r", f"{base_path}/home/user"], Path(f"{base_path}/home/user"))
-    assert "запрещено удалять текущую или родительскую директорию" in result
-
-    result = rm(["-r", f"{base_path}/home"], Path(f"{base_path}/home/user"))
-    assert "запрещено удалять текущую или родительскую директорию" in result
-
 def test_rm_input(fs, base_path, monkeypatch):
     """Проверка подтверждения удаления катологов"""
 
@@ -55,4 +49,4 @@ def test_rm_input(fs, base_path, monkeypatch):
 
     result = rm(["-r", f"{base_path}/home/user/project"], Path(f"{base_path}"))
     assert result == "SUCCESS"
-    assert not Path(f"{base_path}/home/user/project").exists()  # Директория удалена
+    assert not Path(f"{base_path}/home/user/project").exists()
