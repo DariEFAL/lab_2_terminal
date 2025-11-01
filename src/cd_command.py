@@ -11,14 +11,19 @@ def cd(argumentes: list) -> str:
     if len(argumentes) != 1:
         return "ERROR: команда cd принимает ровно один аргумент"
 
-    arg = Path(argumentes[0])
-
-    if str(arg) == "~":
-        arg = Path.home()
+    arg = Path(argumentes[0]).expanduser().resolve()
 
     try:
         os.chdir(arg)
+    except FileNotFoundError:
+        return f"ERROR: директория {arg} не существует"
+    except NotADirectoryError:
+        return "ERROR: {arg} не является директорией"
+    except PermissionError:
+        return f"ERROR: доступ к директории {arg} запрещён"
+    except OSError:
+        return "ERROR: системная ошибка"
     except Exception:
-        return f"ERROR: {arg} не является директорией"
+        return f"ERROR: не удалось перейти в директорию {arg}"
 
     return "SUCCESS"

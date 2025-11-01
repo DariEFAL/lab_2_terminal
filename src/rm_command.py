@@ -13,7 +13,7 @@ def rm(argumentes: list, path_cwd: Path) -> str:
     if len(argumentes) - argumentes.count("-r") != 1:
         return "ERROR: неправильный синтаксис команды"
 
-    arg = [Path(i) for i in argumentes if i != "-r"][0]
+    arg = [Path(i).expanduser().resolve() for i in argumentes if i != "-r"][0]
 
     try:
         if arg.is_file():

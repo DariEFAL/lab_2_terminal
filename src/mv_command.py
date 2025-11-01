@@ -12,7 +12,7 @@ def mv(argumentes: list) -> str:
     if len(argumentes) != 2:
         return "ERROR: неправильный синтаксис команды"
 
-    arg_1, arg_2 = [Path(i) for i in argumentes]
+    arg_1, arg_2 = [Path(i).expanduser().resolve() for i in argumentes]
 
     try:
         if arg_1.is_dir():

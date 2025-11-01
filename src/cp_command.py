@@ -13,7 +13,7 @@ def cp(argumentes: list) -> str:
     if len(argumentes) - argumentes.count("-r") != 2:
         return "ERROR: неправильный синтаксис команды"
 
-    arg_1, arg_2 = [Path(i) for i in argumentes if i != "-r"]
+    arg_1, arg_2 = [Path(i).expanduser().resolve() for i in argumentes if i != "-r"]
 
     try:
         if "-r" in argumentes:
@@ -21,7 +21,7 @@ def cp(argumentes: list) -> str:
                 return "ERROR: невозможно скопировать директорию в файл"
             if arg_2.exists():
                 arg_2 = Path(os.path.join(arg_2, arg_1.name))
-            if arg_1.resolve() in arg_2.resolve().parents:
+            if arg_1 in arg_2.parents:
                 return "ERROR: невозможно скопировать директорию в саму себя"
             shutil.copytree(arg_1, arg_2)
 

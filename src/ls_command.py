@@ -34,7 +34,7 @@ def ls(argumentes: list, path_cwd: Path) -> str:
         if arg == "-l":
             continue
 
-        arg = Path(arg).resolve()
+        arg = Path(arg).expanduser().resolve()
 
         if arg.is_file():
             print("Каталог:", arg.parent)
