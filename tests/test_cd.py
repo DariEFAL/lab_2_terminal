@@ -27,7 +27,7 @@ def test_cd(fs, base_path):
     result = cd(["j", "g"])
     assert "принимает ровно один аргумент" in result
 
-    result = cd(["\home"])
+    result = cd([f"{base_path}\home"])
     assert result == "SUCCESS"
 
     result = cd([".."])
